@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: prod
+  name: nginx-deployment
+  labels:
+    app: bakehouse
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: bakehouse
+  template:
+    metadata:
+      labels:
+        app: bakehouse
+    spec:
+      containers:
+      - name: jenkins
+        image: ayamoustafa/jenkins
+        ports:
+        - containerPort: 80
