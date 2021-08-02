@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  namespace: prod
+  namespace: test
   name: bakehouse
 spec:
   type: NodePort
