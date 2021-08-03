@@ -8,8 +8,6 @@ pipeline {
 
 			}
             }
-
-        }
         stage("deploy the k8s"){
         	steps{
         		sh "kubectl apply -f namespace.yaml"
@@ -19,3 +17,4 @@ pipeline {
 
         }
     }
+}
