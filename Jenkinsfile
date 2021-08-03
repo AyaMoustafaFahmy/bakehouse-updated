@@ -9,7 +9,7 @@ pipeline {
     stages { 
         stage('Cloning Git') { 
             steps { 
-                git "https://github.com/AyaMoustafaFahmy/bakehouse-updated"
+                git "https://github.com/AyaMoustafaFahmy/bakehouse-updated.git"
                }
         } 
         
