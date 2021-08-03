@@ -10,8 +10,7 @@ pipeline {
             }
         stage("deploy the k8s"){
         	steps{
-        		sh "kubectl apply -f namespace.yaml --kubeconfing=/var/lib/jenkins/.kube/config"
-        		sh "kubectl apply -f deploy.yaml"
+        		sh "kubectl apply -f deploy.yaml --kubeconfing=/var/lib/jenkins/.kube/config"
         		sh "kubectl apply -f service.yaml"
         	}
 
