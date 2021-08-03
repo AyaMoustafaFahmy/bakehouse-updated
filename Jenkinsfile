@@ -1,6 +1,6 @@
 pipeline { 
     environment { 
-        registry = "ayamoustafa/jenkins" 
+        registry = "ayamoustafa/jenkins:$BUILD_NUMBER" 
         registryCredential = 'dockerhub_id' 
         dockerImage = '' 
     }
@@ -16,7 +16,7 @@ pipeline {
         stage('Building image') { 
             steps { 
                 script { 
-                    sh "docker build -t ayamoustafa/jenkins:$BUILD_NUMBER"
+                    sh "docker build -t ayamoustafa/jenkins:$BUILD_NUMBER ."
                     sh "docker login --username ayamoustafa --password $my_docker_pass"
                     //dockerImage = docker.build registry + ":$BUILD_NUMBER" 
                 }
@@ -27,8 +27,9 @@ pipeline {
         stage('Deploy our image') { 
             steps { 
                 script { 
-                    docker.withRegistry( '', registryCredential ) { 
-                        dockerImage.push() 
+//                     docker.withRegistry( '', registryCredential ) { 
+//                         dockerImage.push() 
+                    sh "docker push $registry"
                     
                     }
                 } 
