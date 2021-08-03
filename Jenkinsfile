@@ -4,9 +4,10 @@ pipeline {
         stage('pull image from dockerhub') {
             steps {
             	withCredentials([usernameColonPassword(credentialsId: 'dockerhub_id', variable: 'prod')]) {
-            		sh "docker login -u ayamoustafa -p ${My_Docker_Pass}"
-				}
-                sh 'docker pull ayamoustafa/jenkins'
+			       
+			sh 'docker pull ayamoustafa/jenkins'
+
+			}
             }
 
         }
