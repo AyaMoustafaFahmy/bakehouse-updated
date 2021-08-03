@@ -17,7 +17,7 @@ pipeline {
             steps { 
                 script { 
                     sh "docker build -t ayamoustafa/jenkins:$BUILD_NUMBER ."
-                    sh "docker login --username ayamoustafa --password "$my_docker_pass""
+                    sh "docker login --username ayamoustafa --password ${my_docker_pass}"
                     //dockerImage = docker.build registry + ":$BUILD_NUMBER" 
                 }
             } 
