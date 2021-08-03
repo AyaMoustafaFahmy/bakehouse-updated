@@ -2,9 +2,8 @@ pipeline {
     agent any
     stages {
         stage('pull image from dockerhub') {
-            steps {
-            	withCredentials([usernameColonPassword(credentialsId: 'dockerhub_id', variable: 'prod')]) {
-			       
+            steps {		
+	                sh "docker login --username ayamoustafa --password ${my_docker_pass}"
 			sh 'docker pull ayamoustafa/jenkins'
 
 			}
