@@ -9,14 +9,16 @@ pipeline {
     stages { 
         stage('Cloning Git') { 
             steps { 
-                git 'https://github.com/AyaMoustafaFahmy/bakehouse-updated'
+                checkout scm
             }
         } 
         
         stage('Building image') { 
             steps { 
                 script { 
-                    dockerImage = docker.build registry + ":$BUILD_NUMBER" 
+                    sh "docker build -t ayamoustafa/jenkins:$BUILD_NUMBER"
+                    sh "docker login --username ayamoustafa --password $my_docker_pass"
+                    //dockerImage = docker.build registry + ":$BUILD_NUMBER" 
                 }
             } 
         }
@@ -27,6 +29,7 @@ pipeline {
                 script { 
                     docker.withRegistry( '', registryCredential ) { 
                         dockerImage.push() 
+                    
                     }
                 } 
             }
