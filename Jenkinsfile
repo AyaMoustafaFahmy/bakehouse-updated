@@ -16,9 +16,10 @@ pipeline {
         stage('Building image') { 
             steps { 
                 script { 
-                    sh "docker build -t ayamoustafa/jenkins:$BUILD_NUMBER ."
-                    sh "docker login --username ayamoustafa --password ${my_docker_pass}"
-                    //dockerImage = docker.build registry + ":$BUILD_NUMBER" 
+//                     sh "docker login --username ayamoustafa --password ${my_docker_pass}"
+//                     sh "docker build -t ayamoustafa/jenkins:$BUILD_NUMBER ."
+
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER" 
                 }
             } 
         }
@@ -27,19 +28,12 @@ pipeline {
         stage('Deploy our image') { 
             steps { 
                 script { 
-//                     docker.withRegistry( '', registryCredential ) { 
-//                         dockerImage.push() 
-                    sh "docker push $registry"
+                    docker.withRegistry( '', registryCredential ) { 
+                        dockerImage.push() 
+//                     sh "docker push $registry"
                     
                  
                 } 
-            }
-        } 
-
-        
-        stage('Cleaning up') { 
-            steps { 
-                sh "docker rmi $registry:$BUILD_NUMBER" 
             }
         } 
 
