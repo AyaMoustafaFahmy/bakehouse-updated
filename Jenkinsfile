@@ -4,7 +4,7 @@ pipeline {
         stage('pull image from dockerhub') {
             steps {		
 	                sh "docker login --username ayamoustafa --password ${my_docker_pass}"
-			sh 'docker pull ayamoustafa/jenkins:$BUILD_NUMBER'
+			sh 'docker pull ayamoustafa/jenkins:26'
 
 			}
             }
