@@ -31,7 +31,7 @@ pipeline {
                     docker.withRegistry( '', registryCredential ) { 
                         dockerImage.push() 
 //                     sh "docker push $registry"
-                    
+                    }
                  
                 } 
             }
