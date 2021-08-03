@@ -1,6 +1,6 @@
 pipeline { 
     environment { 
-        registry = "ayamoustafa/jenkins" 
+        registry = "ayamoustafa/jenkins:$BUILD_NUMBER" 
         registryCredential = 'dockerhub_id' 
         dockerImage = '' 
     }
@@ -9,17 +9,17 @@ pipeline {
     stages { 
         stage('Cloning Git') { 
             steps { 
-                git "https://github.com/AyaMoustafaFahmy/bakehouse-updated.git"
+                checkout scm
                }
         } 
         
         stage('Building image') { 
             steps { 
                 script { 
-//                     sh "docker login --username ayamoustafa --password ${my_docker_pass}"
-//                     sh "docker build -t ayamoustafa/jenkins:$BUILD_NUMBER ."
+                    sh "docker login --username ayamoustafa --password ${my_docker_pass}"
+                    sh "docker build -t ayamoustafa/jenkins:$BUILD_NUMBER ."
 
-                    dockerImage = docker.build registry + ":$BUILD_NUMBER" 
+//                     dockerImage = docker.build registry + ":$BUILD_NUMBER" 
                 }
             } 
         }
@@ -28,10 +28,10 @@ pipeline {
         stage('Deploy our image') { 
             steps { 
                 script { 
-                    docker.withRegistry( '', registryCredential ) { 
-                        dockerImage.push() 
-//                     sh "docker push $registry"
-                    }
+//                     docker.withRegistry( '', registryCredential ) { 
+//                         dockerImage.push() 
+//                     }
+                    sh "docker push $registry"
                  
                 } 
             }
