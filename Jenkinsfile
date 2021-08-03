@@ -9,8 +9,8 @@ pipeline {
     stages { 
         stage('Cloning Git') { 
             steps { 
-                checkout scm
-            }
+                git "https://github.com/AyaMoustafaFahmy/bakehouse-updated"
+               }
         } 
         
         stage('Building image') { 
