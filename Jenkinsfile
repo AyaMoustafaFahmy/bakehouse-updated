@@ -31,7 +31,7 @@ pipeline {
 //                         dockerImage.push() 
                     sh "docker push $registry"
                     
-                    }
+                 
                 } 
             }
         } 
