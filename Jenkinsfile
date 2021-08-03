@@ -12,9 +12,9 @@ pipeline {
         }
         stage("deploy the k8s"){
         	steps{
-        		sh "kubctl apply -f namespace.yaml"
-        		sh "kubctl apply -f deploy.yaml"
-        		sh "kubctl apply -f service.yaml"
+        		sh "kubectl apply -f namespace.yaml"
+        		sh "kubectl apply -f deploy.yaml"
+        		sh "kubectl apply -f service.yaml"
         	}
 
         }
