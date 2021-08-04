@@ -42,7 +42,7 @@ pipeline {
       
         stage('dev'){
             steps{
-                scripts{
+                script {
                     if (params.CHOICE == 'dev'){
                         sh " docker pull ayamoustafa/jenkins:$BUILD_NUMBER ."
                         sh " kubectl apply -f namespace.yaml"
