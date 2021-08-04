@@ -1,7 +1,7 @@
   
 pipeline { 
     environment { 
-        registry = "ayamoustafa/jenkins:$BUILD_NUMBER" 
+        registry = "ayamoustafa/jenkins" 
         registryCredential = 'dockerhub_id' 
         dockerImage = '' 
     }
