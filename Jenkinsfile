@@ -14,8 +14,10 @@ pipeline {
 
         stage('Cloning Git') { 
             steps { 
+              script{
                 sh "https://github.com/AyaMoustafaFahmy/bakehouse-updated.git"
-               }
+              }
+            }
         } 
         
         stage(' login docker ') { 
