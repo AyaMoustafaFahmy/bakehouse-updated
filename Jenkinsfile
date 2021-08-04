@@ -25,12 +25,17 @@ pipeline {
                 }
             } 
         }
+      
+      
+      stage(' Release '){
+        steps{
+          if (${params.CHOICE} == 'release'){
+              sh " docker build -t ayamoustafa/jenkins:$BUILD_NUMBER ."
+              sh "  docker docker push $registry "
 
-        if (${params.CHOICE} == 'release'){
-            sh " docker build -t ayamoustafa/jenkins:$BUILD_NUMBER ."
-            sh "  docker docker push $registry "
-
+          }
         }
+      }
     }
 }
 
