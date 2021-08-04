@@ -32,7 +32,7 @@ pipeline {
           script {
             if (${params.CHOICE} == 'release'){
                 sh " docker build -t ayamoustafa/jenkins:$BUILD_NUMBER ."
-                sh "  docker docker push $registry "
+                sh "  docker docker push  ayamoustafa/jenkins:$BUILD_NUMBER"
 
             }
           }
