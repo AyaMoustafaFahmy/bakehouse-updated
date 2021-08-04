@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
       - name: jenkins
-        image: ayamoustafa/jenkins
+        image: ayamoustafa/jenkins:26
         ports:
         - containerPort: 80
