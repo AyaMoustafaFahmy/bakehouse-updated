@@ -27,10 +27,8 @@ pipeline {
         }
 
         if (${params.CHOICE} == 'release'){
-            sh ''
-                docker build -t ayamoustafa/jenkins:$BUILD_NUMBER .
-                docker docker push $registry
-                ''
+            sh " docker build -t ayamoustafa/jenkins:$BUILD_NUMBER ."
+            sh "  docker docker push $registry "
 
         }
     }
