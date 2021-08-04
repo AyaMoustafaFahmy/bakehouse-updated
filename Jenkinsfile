@@ -54,7 +54,35 @@ pipeline {
                 }
             }
         }
+      
+          stage('prod'){
+            steps{
+                script {
+                    if (params.CHOICE == 'prod'){
+                        sh " docker pull ayamoustafa/jenkins:$BUILD_NUMBER ."
+                        sh " kubectl apply -f namespace.yaml"
+                        sh " kubectl apply -f deploy.yaml"
+                        sh " kubectl apply -f service.yaml"
 
+                    }
+
+                }
+            }
+        }
+          stage('test'){
+            steps{
+                script {
+                    if (params.CHOICE == 'test'){
+                        sh " docker pull ayamoustafa/jenkins:$BUILD_NUMBER ."
+                        sh " kubectl apply -f namespace.yaml"
+                        sh " kubectl apply -f deploy.yaml"
+                        sh " kubectl apply -f service.yaml"
+
+                    }
+
+                }
+            }
+        }
       
     }
 }
