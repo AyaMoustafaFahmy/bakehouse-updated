@@ -27,7 +27,7 @@ pipeline {
         }
       
       
-        stage(' params.CHOICE ') {
+      stage(' ${params.CHOICE} ') {
             steps {
               script {
                 if (params.CHOICE == 'release'){
@@ -35,15 +35,7 @@ pipeline {
                     sh "  docker docker push  ayamoustafa/jenkins:$BUILD_NUMBER"
 
                 }
-              }
-            }
-        }
-      
-      
-        stage('dev'){
-            steps{
-                script {
-                    if (params.CHOICE == 'dev'){
+                else if (params.CHOICE == 'dev'){
                         sh " docker pull ayamoustafa/jenkins:$BUILD_NUMBER ."
                         sh " kubectl apply -f namespace.yaml"
                         sh " kubectl apply -f deploy.yaml"
@@ -63,10 +55,10 @@ pipeline {
                         sh " kubectl apply -f service.yaml"
 
                     }
-
-                }
+              }
             }
         }
+      
       
 //           stage('prod'){
 //             steps{
