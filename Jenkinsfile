@@ -27,50 +27,32 @@ pipeline {
         }
       
       
-      stage(' Release ') {
-        steps {
-          script {
-            if (params.CHOICE == 'release'){
-                sh " docker build -t ayamoustafa/jenkins:$BUILD_NUMBER ."
-                sh "  docker docker push  ayamoustafa/jenkins:$BUILD_NUMBER"
+        stage(' Release ') {
+            steps {
+              script {
+                if (params.CHOICE == 'release'){
+                    sh " docker build -t ayamoustafa/jenkins:$BUILD_NUMBER ."
+                    sh "  docker docker push  ayamoustafa/jenkins:$BUILD_NUMBER"
 
+                }
+              }
             }
-          }
         }
-      }
-      
-      stage('dev'){
+
+        stage('dev'){
             steps{
                 scripts{
-                    if (params.CHOICE == 'dev'){
+                    if (params.CHOICE == 'release'){
                         sh " docker pull ayamoustafa/jenkins:$BUILD_NUMBER ."
                         sh " kubectl apply -f namespace.yaml"
                         sh " kubectl apply -f deploy.yaml"
                         sh " kubectl apply -f service.yaml"
+
                     }
+
                 }
             }
         }
+      
     }
 }
-
-//         script { 
-
-// //                     dockerImage = docker.build registry + ":$BUILD_NUMBER" 
-//          }   
-
-
-//         stage('Deploy our image') { 
-//             steps { 
-//                 script { 
-// //                     docker.withRegistry( '', registryCredential ) { 
-// //                         dockerImage.push() 
-// //                     }
-//                     sh "docker push $registry"
-                 
-//                 } 
-//             }
-//         } 
-
-//     }
-// }
