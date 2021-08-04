@@ -27,12 +27,14 @@ pipeline {
         }
       
       
-      stage(' Release '){
-        steps{
-          if (${params.CHOICE} == 'release'){
-              sh " docker build -t ayamoustafa/jenkins:$BUILD_NUMBER ."
-              sh "  docker docker push $registry "
+      stage(' Release ') {
+        steps {
+          script {
+            if (${params.CHOICE} == 'release'){
+                sh " docker build -t ayamoustafa/jenkins:$BUILD_NUMBER ."
+                sh "  docker docker push $registry "
 
+            }
           }
         }
       }
