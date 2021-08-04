@@ -27,7 +27,7 @@ pipeline {
         }
       
       
-        stage(' Release ') {
+        stage(' params.CHOICE ') {
             steps {
               script {
                 if (params.CHOICE == 'release'){
@@ -48,6 +48,19 @@ pipeline {
                         sh " kubectl apply -f namespace.yaml"
                         sh " kubectl apply -f deploy.yaml"
                         sh " kubectl apply -f service.yaml"
+                    }
+                  else if (params.CHOICE == 'prod'){
+                        sh " docker pull ayamoustafa/jenkins:$BUILD_NUMBER ."
+                        sh " kubectl apply -f namespace.yaml"
+                        sh " kubectl apply -f deploy.yaml"
+                        sh " kubectl apply -f service.yaml"
+
+                    }
+                  else if (params.CHOICE == 'test'){
+                        sh " docker pull ayamoustafa/jenkins:$BUILD_NUMBER ."
+                        sh " kubectl apply -f namespace.yaml"
+                        sh " kubectl apply -f deploy.yaml"
+                        sh " kubectl apply -f service.yaml"
 
                     }
 
@@ -55,34 +68,34 @@ pipeline {
             }
         }
       
-          stage('prod'){
-            steps{
-                script {
-                    if (params.CHOICE == 'prod'){
-                        sh " docker pull ayamoustafa/jenkins:$BUILD_NUMBER ."
-                        sh " kubectl apply -f namespace.yaml"
-                        sh " kubectl apply -f deploy.yaml"
-                        sh " kubectl apply -f service.yaml"
+//           stage('prod'){
+//             steps{
+//                 script {
+//                     if (params.CHOICE == 'prod'){
+//                         sh " docker pull ayamoustafa/jenkins:$BUILD_NUMBER ."
+//                         sh " kubectl apply -f namespace.yaml"
+//                         sh " kubectl apply -f deploy.yaml"
+//                         sh " kubectl apply -f service.yaml"
 
-                    }
+//                     }
 
-                }
-            }
-        }
-          stage('test'){
-            steps{
-                script {
-                    if (params.CHOICE == 'test'){
-                        sh " docker pull ayamoustafa/jenkins:$BUILD_NUMBER ."
-                        sh " kubectl apply -f namespace.yaml"
-                        sh " kubectl apply -f deploy.yaml"
-                        sh " kubectl apply -f service.yaml"
+//                 }
+//             }
+//         }
+//           stage('test'){
+//             steps{
+//                 script {
+//                     if (params.CHOICE == 'test'){
+//                         sh " docker pull ayamoustafa/jenkins:$BUILD_NUMBER ."
+//                         sh " kubectl apply -f namespace.yaml"
+//                         sh " kubectl apply -f deploy.yaml"
+//                         sh " kubectl apply -f service.yaml"
 
-                    }
+//                     }
 
-                }
-            }
-        }
+//                 }
+//             }
+//         }
       
     }
 }
