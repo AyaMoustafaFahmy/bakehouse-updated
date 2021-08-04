@@ -38,6 +38,22 @@ pipeline {
               }
             }
         }
+      
+      
+        stage('dev'){
+            steps{
+                scripts{
+                    if (params.CHOICE == 'dev'){
+                        sh " docker pull ayamoustafa/jenkins:$BUILD_NUMBER ."
+                        sh " kubectl apply -f namespace.yaml"
+                        sh " kubectl apply -f deploy.yaml"
+                        sh " kubectl apply -f service.yaml"
+
+                    }
+
+                }
+            }
+        }
 
       
     }
