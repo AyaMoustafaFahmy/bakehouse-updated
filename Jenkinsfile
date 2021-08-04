@@ -14,7 +14,7 @@ pipeline {
 
         stage('Cloning Git') { 
             steps { 
-                git https://github.com/AyaMoustafaFahmy/bakehouse-updated.git
+                git 'https://github.com/AyaMoustafaFahmy/bakehouse-updated.git'
             }
         } 
         
