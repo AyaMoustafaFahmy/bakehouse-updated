@@ -30,7 +30,7 @@ pipeline {
       stage(' Release ') {
         steps {
           script {
-            if (${params.CHOICE} == 'release'){
+            if (params.CHOICE == 'release'){
                 sh " docker build -t ayamoustafa/jenkins:$BUILD_NUMBER ."
                 sh "  docker docker push  ayamoustafa/jenkins:$BUILD_NUMBER"
 
