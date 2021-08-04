@@ -27,7 +27,7 @@ pipeline {
         }
       
       
-      stage( 'deploy' + BRANCH ) {
+      stage( 'deploy' ) {
             steps {
               script {
                 if (params.CHOICE == 'release'){
